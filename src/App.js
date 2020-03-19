@@ -1,17 +1,19 @@
 import React, { useState, useEffect } from "react";
-import logo from "./logo.svg";
+import "normalize.css";
 import "./App.css";
+import Header from "./components/Header";
+import GlobalCases from "./components/GlobalCases";
+import LocalCases from "./components/LocalCases";
 
 function App() {
   const [isLoading, setIsLoading] = useState(false);
-  const [isCLoading, setIsCLoading] = useState(false);
   const [confirmed, setConfirmed] = useState(0);
   const [recovered, setRecoverd] = useState(0);
   const [deaths, setDeaths] = useState(0);
   const [lastUpdate, setLastUpdate] = useState("");
+  const [isCLoading, setIsCLoading] = useState(false);
   const [value, setValue] = useState("India");
   const [countries, setCountries] = useState([]);
-
   const [cConfirmed, setCConfirmed] = useState(0);
   const [cRecovered, setCRecoverd] = useState(0);
   const [cDeaths, setCDeaths] = useState(0);
@@ -67,59 +69,27 @@ function App() {
   }, [value]);
 
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        {isLoading ? (
-          <p>Loading...</p>
-        ) : (
-          <>
-            <p>Total no of confirmed cases: {confirmed}</p>
-            <p>Total no of recovered cases: {recovered}</p>
-            <p>Total no of deaths cases: {deaths}</p>
-            <p>{"==========================="}</p>
+    <div className="app">
+      <Header className="align-center" />
 
-            {isCLoading ? (
-              <p>Loading...</p>
-            ) : (
-              <>
-                <label>
-                  Pick a country:
-                  <select value={value} onChange={handleChange}>
-                    {Object.keys(countries).map((country, i) => {
-                      return (
-                        <option value={country} key={i}>
-                          {country}
-                        </option>
-                      );
-                    })}
-                  </select>
-                </label>
+      <GlobalCases
+        isLoading={isLoading}
+        confirmed={confirmed}
+        recovered={recovered}
+        deaths={deaths}
+      />
 
-                <p>
-                  No of confirmed cases in {value}: {cConfirmed}
-                </p>
-                <p>
-                  No of recovered cases in {value}: {cRecovered}
-                </p>
-                <p>
-                  No of deaths cases in {value}: {cDeaths}
-                </p>
-              </>
-            )}
+      <LocalCases
+        isLoading={isCLoading}
+        value={value}
+        countries={countries}
+        handleChange={handleChange}
+        confirmed={cConfirmed}
+        recovered={cRecovered}
+        deaths={cDeaths}
+      />
 
-            <p>Last updated: {lastUpdate}</p>
-          </>
-        )}
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <p style={{ textAlign: "center" }}>Last updated: {lastUpdate}</p>
     </div>
   );
 }
