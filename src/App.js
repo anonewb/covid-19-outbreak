@@ -12,7 +12,7 @@ function App() {
   const [deaths, setDeaths] = useState(0);
   const [lastUpdate, setLastUpdate] = useState("");
   const [isCLoading, setIsCLoading] = useState(false);
-  const [value, setValue] = useState("India");
+  const [value, setValue] = useState("");
   const [countries, setCountries] = useState([]);
   const [cConfirmed, setCConfirmed] = useState(0);
   const [cRecovered, setCRecoverd] = useState(0);
@@ -27,7 +27,7 @@ function App() {
     fetch("https://covid19.mathdro.id/api")
       .then(res => res.json())
       .then(res => {
-        console.log(res);
+        // console.log(res);
         setConfirmed(res.confirmed.value);
         setRecoverd(res.recovered.value);
         setDeaths(res.deaths.value);
@@ -37,7 +37,7 @@ function App() {
         const dt = date.getDate();
         const hr = date.getHours();
         const min = date.getMinutes();
-        console.log(date, year, month, dt);
+        // console.log(date, year, month, dt);
         setLastUpdate(
           `${dt}-${month}-${year}, ${hr}:${min} ${hr > 12 ? "PM" : "AM"}`
         );
@@ -49,48 +49,65 @@ function App() {
     fetch("https://covid19.mathdro.id/api/countries")
       .then(res => res.json())
       .then(res => {
-        console.log(res);
+        // console.log(res);
         setCountries(res.countries);
         setIsCLoading(false);
       })
       .catch(e => console.log(e));
+
+    fetch(`https://ipapi.co/json/`)
+      .then(res => res.json())
+      .then(res => setValue(res.country_name))
+      .catch(e => console.log(e));
   }, []);
 
+  // https://ipapi.co/country
+
   useEffect(() => {
-    fetch(`https://covid19.mathdro.id/api/countries/${value}`)
-      .then(res => res.json())
-      .then(res => {
-        console.log(res);
-        setCConfirmed(res.confirmed.value);
-        setCRecoverd(res.recovered.value);
-        setCDeaths(res.deaths.value);
-      })
-      .catch(e => console.log(e));
+    if (value) {
+      fetch(`https://covid19.mathdro.id/api/countries/${value}`)
+        .then(res => res.json())
+        .then(res => {
+          // console.log(res);
+          setCConfirmed(res.confirmed.value);
+          setCRecoverd(res.recovered.value);
+          setCDeaths(res.deaths.value);
+        })
+        .catch(e => {
+          alert("No data found!!");
+          setCConfirmed(0);
+          setCRecoverd(0);
+          setCDeaths(0);
+        });
+    }
   }, [value]);
 
   return (
-    <div className="app">
+    <>
       <Header className="align-center" />
+      <div className="app">
+        <GlobalCases
+          isLoading={isLoading}
+          confirmed={confirmed}
+          recovered={recovered}
+          deaths={deaths}
+        />
 
-      <GlobalCases
-        isLoading={isLoading}
-        confirmed={confirmed}
-        recovered={recovered}
-        deaths={deaths}
-      />
+        <LocalCases
+          isLoading={isCLoading}
+          value={value}
+          countries={countries}
+          handleChange={handleChange}
+          confirmed={cConfirmed}
+          recovered={cRecovered}
+          deaths={cDeaths}
+        />
 
-      <LocalCases
-        isLoading={isCLoading}
-        value={value}
-        countries={countries}
-        handleChange={handleChange}
-        confirmed={cConfirmed}
-        recovered={cRecovered}
-        deaths={cDeaths}
-      />
-
-      <p style={{ textAlign: "center" }}>Last updated: {lastUpdate}</p>
-    </div>
+        <p style={{ textAlign: "center", fontStyle: "italic" }}>
+          Last updated: {lastUpdate}
+        </p>
+      </div>
+    </>
   );
 }
 
