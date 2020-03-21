@@ -106,6 +106,12 @@ function App() {
         <p style={{ textAlign: "center", fontStyle: "italic" }}>
           Last updated: {lastUpdate}
         </p>
+        <p style={{ textAlign: "center", fontSize: 14 }}>
+          Read more about Covid19 outbreak{" "}
+          <a href="https://www.who.int/emergencies/diseases/novel-coronavirus-2019/">
+            here
+          </a>
+        </p>
       </div>
     </>
   );

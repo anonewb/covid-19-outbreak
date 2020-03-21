@@ -1,5 +1,6 @@
 import React from "react";
 import styled from "styled-components";
+import CountUp from "react-countup";
 
 const CardWrapper = styled.div`
   flex: 1 100%;
@@ -40,13 +41,20 @@ export default function Card(props) {
   return (
     <CardWrapper>
       {props.type === "confirmed" && (
-        <Value confirmed>{numberWithCommas(props.value)}</Value>
+        // <Value confirmed>{numberWithCommas(props.value)}</Value>
+        <Value confirmed>
+          <CountUp end={props.value} separator="," />
+        </Value>
       )}
       {props.type === "recovered" && (
-        <Value recovered>{numberWithCommas(props.value)}</Value>
+        <Value recovered>
+          <CountUp end={props.value} separator="," />
+        </Value>
       )}
       {props.type === "deaths" && (
-        <Value deaths>{numberWithCommas(props.value)}</Value>
+        <Value deaths>
+          <CountUp end={props.value} separator="," />
+        </Value>
       )}
       <Type>{capitalizeFirstLetter(props.type)}</Type>
     </CardWrapper>
