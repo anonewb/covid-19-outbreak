@@ -62,7 +62,7 @@ export default function Statewise(props) {
         Indian State/UT Cases
       </h4>
       <Header>
-        <Col>State</Col>
+        <Col>State/UT</Col>
         <Col>Confirmed</Col>
         <Col>Recovered</Col>
         <Col>Death</Col>

@@ -91,60 +91,7 @@ function App() {
         .then(res => setStatewise(res.data.statewise))
         .catch(e => console.log(e));
     };
-    // if (statewise === undefined) {
-    //   return fetchStateCasesData();
-    // }
     fetchStateCasesData();
-
-    // const fetchData =  () => {
-
-    // };
-    // fetchData()
-
-    // setIsLoading(true);
-    // fetch("https://covid19.mathdro.id/api")
-    //   .then(res => res.json())
-    //   .then(res => {
-    //     // console.log(res);
-    //     setConfirmed(res.confirmed.value);
-    //     setRecoverd(res.recovered.value);
-    //     setDeaths(res.deaths.value);
-    //     const date = new Date(res.lastUpdate);
-    //     const year = date.getFullYear();
-    //     const month = date.getMonth() + 1;
-    //     const dt = date.getDate();
-    //     const hr = date.getHours();
-    //     const min = date.getMinutes();
-    //     // console.log(date, year, month, dt);
-    //     setLastUpdate(
-    //       `${dt}-${month}-${year}, ${hr}:${min} ${hr > 12 ? "PM" : "AM"}`
-    //     );
-    //     setIsLoading(false);
-    //   })
-    //   .catch(e => console.log(e));
-
-    // setIsCLoading(true);
-    // fetch("https://covid19.mathdro.id/api/countries")
-    //   .then(res => res.json())
-    //   .then(res => {
-    //     // console.log(res);
-    //     setCountries(res.countries);
-    //     setIsCLoading(false);
-    //   })
-    //   .catch(e => console.log(e));
-
-    // fetch(`https://ipapi.co/json/`)
-    //   .then(res => res.json())
-    //   .then(res => setValue(res.country_name))
-    //   .catch(e => console.log(e));
-
-    // fetch(
-    //   `https://api.rootnet.in/covid19-in/unofficial/covid19india.org/statewise`
-    // )
-    //   .then(res => res.json())
-    //   .then(res => setStatewise(res.data.statewise))
-    //   .catch(e => console.log(e));
-    // console.log("statewise", statewise);
   }, []);
 
   useEffect(() => {
@@ -201,10 +148,16 @@ function App() {
             Last updated: {lastUpdate}
           </p>
           <p style={{ textAlign: "center", fontSize: 14 }}>
-            Read more about Covid19 outbreak{" "}
             <a href="https://www.who.int/emergencies/diseases/novel-coronavirus-2019/">
-              here
-            </a>
+              Read more
+            </a>{" "}
+            about Covid19 outbreak
+          </p>
+          <p style={{ textAlign: "center", fontSize: 14 }}>
+            <a href="https://www.mohfw.gov.in/coronvavirushelplinenumber.pdf">
+              Helpline numbers
+            </a>{" "}
+            [By Indian state]
           </p>
 
           <Statewise statewise={statewise} />
