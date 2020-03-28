@@ -13,6 +13,33 @@ const Title = styled.h1`
   width: 100%;
 `;
 
-export default function Header() {
-  return <Title>Covid-19 Outbreak</Title>;
+export default function Header(props) {
+  return (
+    <>
+      {/* {props.theme === "light" ? (
+        <button
+          onClick={props.toDark}
+          style={{
+            position: "absolute",
+            top: 0,
+            right: 0
+          }}
+        >
+          to dark
+        </button>
+      ) : (
+        <button
+          onClick={props.toLight}
+          style={{
+            position: "absolute",
+            top: 0,
+            right: 0
+          }}
+        >
+          to light
+        </button>
+      )} */}
+      <Title>Covid-19 Outbreak</Title>;
+    </>
+  );
 }

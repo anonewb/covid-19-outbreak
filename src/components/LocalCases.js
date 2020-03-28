@@ -2,13 +2,6 @@ import React from "react";
 import Card from "./Card";
 import styled from "styled-components";
 
-const Loading = styled.div`
-  font-size: 2em;
-  text-align: center;
-  color: #0563af;
-  margin: 50px 0 0 0;
-`;
-
 const CenterAlign = styled.div`
   font-size: 1.5em;
   text-align: center;
@@ -32,25 +25,35 @@ const countrySliced = country => {
 };
 
 export default function LocalCases(props) {
-  if (props.isLoading) return <Loading>Loading...</Loading>;
+  // if (props.isLoading) return <Loading>Loading...</Loading>;
   return (
     <CenterAlign>
       <label style={{ color: "#0563af", fontSize: 20 }}>
         Pick a country:
         <div className="box">
           <select value={props.value} onChange={props.handleChange}>
-            {Object.keys(props.countries).map((country, i) => (
-              <option value={country} key={i}>
-                {country.length > 25 ? countrySliced(country) : country}
+            {props.countries.map((country, i) => (
+              <option value={country.name} key={i}>
+                {country.name.length > 25
+                  ? countrySliced(country.name)
+                  : country.name}
               </option>
             ))}
           </select>
         </div>
       </label>
       <CardContainer>
-        <Card type="confirmed" value={props.confirmed} />
-        <Card type="recovered" value={props.recovered} />
-        <Card type="deaths" value={props.deaths} />
+        <Card
+          type="confirmed"
+          value={props.confirmed}
+          isLoading={props.isLoading}
+        />
+        <Card
+          type="recovered"
+          value={props.recovered}
+          isLoading={props.isLoading}
+        />
+        <Card type="deaths" value={props.deaths} isLoading={props.isLoading} />
       </CardContainer>
     </CenterAlign>
   );
