@@ -42,12 +42,6 @@ export default function Statewise(props) {
   if (!props.statewise) {
     return <Skeleton duration={0.5} height={125} />;
   }
-  console.log(props.statewise);
-  //   state: "Kerala"
-  // confirmed: 176
-  // recovered: 11
-  // deaths: 0
-  // active: 165
 
   return (
     <Section>
