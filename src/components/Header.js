@@ -39,7 +39,7 @@ export default function Header(props) {
           to light
         </button>
       )} */}
-      <Title>Covid-19 Outbreak</Title>;
+      <Title>Covid-19 Outbreak</Title>
     </>
   );
 }
