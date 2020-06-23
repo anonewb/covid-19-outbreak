@@ -154,7 +154,7 @@ function App() {
             about Covid19 outbreak
           </p>
           <p style={{ textAlign: "center", fontSize: 14 }}>
-            <a href="https://www.mohfw.gov.in/coronvavirushelplinenumber.pdf">
+            <a href="https://www.mohfw.gov.in/pdf/coronvavirushelplinenumber.pdf">
               Helpline numbers
             </a>{" "}
             [By Indian state]
